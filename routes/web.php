@@ -2,8 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Backend\AreaController;
+use App\Http\Controllers\Backend\PostController;
 use App\Http\Controllers\User\MainUserController;
 use App\Http\Controllers\Admin\MainAdminController;
+use App\Http\Controllers\Backend\SubAreaController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\SubCategoryController;
 
@@ -57,8 +60,12 @@ Route::post('/admin/password/update', [MainAdminController::class, 'adminPasswor
 // ADMIN CATEGORY ROUTES
 
 Route::prefix('admin')->name('admin.')->group(function () {
-
     Route::resource('category', CategoryController::class);
     Route::resource('subcategory', SubCategoryController::class);
-    
+    Route::resource('area', AreaController::class);
+    Route::resource('subarea', SubAreaController::class);
+    Route::resource('post', PostController::class);
 });
+
+Route::get('/get/subcategory/{category_id}', [PostController::class, 'getSubCategory']);
+Route::get('/get/subarea/{area_id}', [PostController::class, 'getSubArea']);
