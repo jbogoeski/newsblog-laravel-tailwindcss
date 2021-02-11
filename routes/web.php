@@ -8,7 +8,10 @@ use App\Http\Controllers\User\MainUserController;
 use App\Http\Controllers\Admin\MainAdminController;
 use App\Http\Controllers\Backend\SubAreaController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\SettingSeoController;
 use App\Http\Controllers\Backend\SubCategoryController;
+use App\Http\Controllers\Backend\SettingSocialController;
+use App\Http\Controllers\Frontend\FrontendController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +25,7 @@ use App\Http\Controllers\Backend\SubCategoryController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('frontend.home');
 });
 
 // ADMIN DASHBOARD
@@ -65,7 +68,19 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('area', AreaController::class);
     Route::resource('subarea', SubAreaController::class);
     Route::resource('post', PostController::class);
+    Route::resource('social', SettingSocialController::class);
+    Route::resource('seo', SettingSeoController::class);
+
 });
 
 Route::get('/get/subcategory/{category_id}', [PostController::class, 'getSubCategory']);
 Route::get('/get/subarea/{area_id}', [PostController::class, 'getSubArea']);
+
+
+
+//Frontend
+
+//Multi langugage routes
+
+Route::get('/language/mkd', [FrontendController::class, 'Mkd'])->name('language.mkd');
+Route::get('/language/english', [FrontendController::class, 'English'])->name('language.english');
