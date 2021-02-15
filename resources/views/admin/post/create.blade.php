@@ -111,7 +111,6 @@
             <label class="md:w-2/3 md:flex-grow">
                 <select id="subarea_id" class="form-select block w-full mt-1 rounded-lg" name="subarea_id" >
                     <option disabled selected>---> Select Subarea</option>
-                    </select>
                 </select>
                 @error('subarea_id')
                 <span class="bg-red-500 px-3 py-1 text-xs text-white font-semibold rounded-full">{{ $message }}</span>

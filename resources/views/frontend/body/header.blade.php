@@ -2,6 +2,8 @@
 
     $categories = DB::table('categories')->orderBy('id', 'ASC')->get();
     $social = DB::table('socials')->first();
+
+    $horizontal = DB::table('ads')->where('type', 2)->first();
     
 @endphp
 
@@ -38,7 +40,7 @@
                                         ->orderBy('id', 'ASC')->get();
                                     @endphp
                                     <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                        <a href="{{ route('post.category', [$category->id, $category->category_en]) }}">
                                             @if (session()->get('lang') == 'mkd')
                                                 {{ $category->category_mk }}
                                             @else
@@ -47,7 +49,7 @@
                                             <b class="caret"></b></a>
                                         <ul class="dropdown-menu">
                                             @foreach ($subcategories as $subcategory)
-                                            <li><a href="#">
+                                            <li><a href="{{ route('post.subcategory', [$subcategory->id, $subcategory->subcategory_en]) }}">
                                                 @if (session()->get('lang') == 'mkd')
                                                 {{ $subcategory->subcategory_mk }}
                                                 @else
@@ -132,7 +134,12 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
-                <div class="top-add"><img src="{{ asset('frontend/img/top-ad.jpg')}}" alt="" /></div>
+                <div class="top-add">
+                    @if ($horizontal == NULL)
+                    @else
+                    <a href="{{$horizontal->link }}"><img src="{{ asset($horizontal->ads)}}" alt="" /></a>
+                    @endif
+                </div>
             </div>
         </div>
     </div>
@@ -173,9 +180,9 @@
                 <marquee>
                     @foreach ($headline as $line)
                         @if (session()->get('lang') == 'mkd')
-                        *    {{ $line->title_en }}
-                        @else
                         *    {{ $line->title_mk }}
+                        @else
+                        *    {{ $line->title_en }}
                         @endif
                     @endforeach
                 </marquee>

@@ -4,6 +4,11 @@
 @php
 	$first_section_big_photo = DB::table('posts')->where('first_section_thumbnail', 1)->orderBy('id', 'desc')->first();	
 	$firstsections = DB::table('posts')->where('first_section', 1)->orderBy('id', 'desc')->limit(8)->get();
+	
+	$horizontal = DB::table('ads')->where('type', 2)->skip(1)->first();
+	$horizontal2 = DB::table('ads')->where('type', 2)->skip(1)->first();
+	$horizontal3 = DB::table('ads')->where('type', 2)->skip(2)->first();
+
 @endphp
 
 <!-- 1st-news-section-start -->	
@@ -17,7 +22,7 @@
 						<div class="lead-news">
 	<div class="service-img"><a href="#"><img src="{{ asset($first_section_big_photo->image) }}" width="800px" alt="Notebook"></a></div>
 							<div class="content">
-						<h4 class="lead-heading-01"><a href="#">
+						<h4 class="lead-heading-01"><a href="{{ route('view.post', [$first_section_big_photo->id])}}">
 							@if (session()->get('lang') == 'mkd')
 							{{ $first_section_big_photo->title_mk }}
 							@else
@@ -49,7 +54,11 @@
 				<!-- add-start -->	
 				<div class="row">
 					<div class="col-md-12 col-sm-12">
-						<div class="add"><img src="{{ asset('frontend/img/top-ad.jpg') }}" alt="" /></div>
+						@if ($horizontal2 == NULL)
+							
+						@else
+							<div class="add"><img src="{{ asset($horizontal2->ads) }}" alt="" /></div>
+						@endif
 					</div>
 				</div><!-- /.add-close -->	
 				
@@ -157,10 +166,19 @@
 				</div>					
 			</div>
 			<div class="col-md-3 col-sm-3">
+				@php
+					$vertical = DB::table('ads')->where('type', 1)->first();
+					$vertical2 = DB::table('ads')->where('type', 1)->skip(1)->first();
+
+				@endphp
 				<!-- add-start -->	
 				<div class="row">
 					<div class="col-md-12 col-sm-12">
-						<div class="sidebar-add"><img src="{{ asset('frontend/img/add_01.jpg') }}" alt="" /></div>
+						@if ($vertical == NULL)
+							
+						@else
+							<div class="sidebar-add"><img src="{{ asset($vertical->ads) }}" alt="" /></div>
+						@endif
 					</div>
 				</div><!-- /.add-close -->	
 				
@@ -176,14 +194,21 @@
 				<!-- facebook-page-start -->
 				<div class="cetagory-title-03">Facebook </div>
 				<div class="fb-root">
-					facebook page here
+				<script async defer crossorigin="anonymous" src="https://connect.facebook.net/mk_MK/sdk.js#xfbml=1&version=v9.0" nonce="o3hD3Zzi"></script>
+				<div class="fb-page" data-href="https://www.facebook.com/facebook" data-tabs="" data-width="340" data-height="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="false"><blockquote cite="https://www.facebook.com/facebook" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/facebook">Facebook</a></blockquote></div>
 				</div><!-- /.facebook-page-close -->	
 				
 				<!-- add-start -->	
 				<div class="row">
 					<div class="col-md-12 col-sm-12">
 						<div class="sidebar-add">
-							<img src="{{ asset('frontend/img/add_01.jpg') }}" alt="" />
+							@if ($vertical2 == NULL)
+								
+							@else
+							<img src="{{ asset($vertical2->ads) }}" alt="" />
+
+							@endif
+							
 						</div>
 					</div>
 				</div><!-- /.add-close -->	
@@ -361,10 +386,25 @@
 		<!-- add-start -->	
 		<div class="row">
 			<div class="col-md-6 col-sm-6">
-				<div class="add"><img src="{{ asset('frontend/img/top-ad.jpg') }}" alt="" /></div>
+				<div class="add">
+					@if ($horizontal2 == NULL)
+								
+					@else
+					<img src="{{ asset($horizontal2->ads) }}" alt="" />
+
+					@endif
+				</div>
 			</div>
 			<div class="col-md-6 col-sm-6">
-				<div class="add"><img src="{{ asset('frontend/img/top-ad.jpg') }}" alt="" /></div>
+				<div class="add">
+					@if ($horizontal3 == NULL)
+								
+					@else
+					<img src="{{ asset($horizontal3->ads) }}" alt="" />
+
+					@endif
+				
+				</div>
 			</div>
 		</div><!-- /.add-close -->	
 		
@@ -416,6 +456,8 @@
 				</div>
 				<!-- ******* -->
 				<br />
+				
+				
 				<div class="row">
 					<div class="col-md-12 col-sm-12">
 						<div class="cetagory-title-02"><a href="#">Sci-Tech<i class="fa fa-angle-right" aria-hidden="true"></i> <span><i class="fa fa-plus" aria-hidden="true"></i> সব খবর  </span></a></div>
@@ -451,11 +493,50 @@
 						</div>
 					</div>
 				</div>
+
+
+				@php
+					$areas = DB::table('areas')->get();
+				@endphp
+				<br><br>
+
+				<div class="row">
+						<div class="cetagory-title-02"><a href="#">Search By Area <i class="fa fa-angle-right" aria-hidden="true"></i> <span><i class="fa fa-plus" aria-hidden="true"></i> সব খবর  </span></a></div>
+					<br>
+					<form action="{{ route('search.areas') }}" method="GET">
+						@csrf
+						<div class="row">
+							<div class="col-lg-4">
+								<select name="area_id" id="" class="form-control" required>
+									<option disabled selected>-Select Area</option>
+									@foreach ($areas as $area)
+										<option value="{{ $area->id}}">{{ $area->area_en }} | {{ $area->area_mk }}</option>
+									@endforeach
+								</select>
+							</div>
+							<div class="col-lg-4">
+								<select id="subarea_id" class="form-control" name="subarea_id" >
+									<option disabled selected>-Select Subarea</option>
+								</select>
+							</div>
+							<div class="col-lg-4">
+								<button class="btn btn-success btn-block">Search</button>
+							</div>
+
+						</div>
+					</form>
+				</div>
+
+				<br><br>
 				
 				<div class="row">
 					<div class="col-md-12 col-sm-12">
 						<div class="sidebar-add">
-							<img src="{{ asset('frontend/img/top-ad.jpg') }}" alt="" />
+							@if ($horizontal2 == NULL )
+								
+							@else
+								<img src="{{ asset($horizontal2->ads) }}" alt="" />
+							@endif
 						</div>
 					</div>
 				</div><!-- /.add-close -->	
@@ -796,4 +877,31 @@
 		</div>
 	</div>
 </section><!-- /.gallery-section-close -->
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.0.4/popper.js"></script>
+
+<!-- SubArea search from Area -->
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('select[name="area_id"]').on('change', function(){
+            var area_id = $(this).val();
+            if(area_id) {
+                $.ajax({
+                    url: "{{ url('/get/subarea/frontend') }}/"+area_id,
+                    type: "GET",
+                    dataType: "json",
+                    success:function(data) {
+                        $("#subarea_id").empty();
+                            $.each(data,function(key,value){
+                                $('#subarea_id').append('<option value="'+value.id+'">'+value.subarea_en+' | '+value.subcarea_mk+'</option');
+                            });
+                    },
+                });
+            } else {
+                alert('danger');
+            }
+        });
+    });
+    </script>
 @endsection
