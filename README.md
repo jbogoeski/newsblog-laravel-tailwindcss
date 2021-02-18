@@ -1,28 +1,38 @@
+# NEWS PORTAL 
+Skills-
 
+-Tailwindcss
 
-A News Portal Based on Laravel 8.0 with lot features like:
--Multi dashboard
+-Laravel8
 
+-Bootstrap
 
+-Multi Dashboard
 
-Requirements
+-Multi Langugage
 
-Laravel 8.0
+Installation-
 
-Installation
 git clone or download
 
 composer install
+
 cp .env.example .env
+
 php artisan key:generate
+
 php artisan migrate
+
 php artisan db:seed
 
-
+<h3>You will need the sql file witch i have uploaded here, import in your database and you are done!</h3>
 
 Demo login info
+Use localhost:8000/admin/login and localhost:8000/admin/dashboard for admin Login. 
+Use localhost:8000/login and localhost:8000/dashboard for User Login. 
 
-user: admin@admin.com | password: password
+admin- 
+admin@admin.com | password: password
 
 
 
