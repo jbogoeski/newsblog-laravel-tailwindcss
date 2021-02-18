@@ -14,9 +14,11 @@ JSON PHP Extension
 BCMath PHP Extension
 
 Demo login info
+
 user: admin@admin.com | password: password
 
 Installation
+
 git clone https://github.com//jbogoeski/newsblog-laravel-tailwindcss.git blog
 
 composer install
