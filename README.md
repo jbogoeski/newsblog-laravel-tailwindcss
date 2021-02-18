@@ -1,31 +1,32 @@
-#Laravel Portal
 
-A News Portal for demonstration purpose. Based on Laravel 8.0
+
+A News Portal Based on Laravel 8.0 with lot features like:
+-Multi dashboard
+
+
 
 Requirements
 
 Laravel 8.0
 
-
-
-
 Installation
-
-git clone https://github.com//jbogoeski/newsblog-laravel-tailwindcss.git blog
+git clone or download
 
 composer install
-
 cp .env.example .env
-
 php artisan key:generate
-
 php artisan migrate
-
 php artisan db:seed
+
+
 
 Demo login info
 
 user: admin@admin.com | password: password
+
+
+
+
 ![dasdh2](https://user-images.githubusercontent.com/61395033/108397886-bec07e80-7218-11eb-8158-94526b87539d.png)
 ![dash1](https://user-images.githubusercontent.com/61395033/108397897-bf591500-7218-11eb-80a4-853c6f83a0d2.png)
 ![dash2](https://user-images.githubusercontent.com/61395033/108397900-bff1ab80-7218-11eb-9804-be6fb95368e5.png)
