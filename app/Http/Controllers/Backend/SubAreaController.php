@@ -39,11 +39,12 @@ class SubAreaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    
     public function store(Request $request)
     {
         $data = $request->validate([
-            'subarea_en' => 'required|min:5|unique:sub_areas',
-            'subarea_mk' => 'required|min:5|unique:sub_areas',
+            'subarea_en' => 'required|min:3|unique:sub_areas',
+            'subarea_mk' => 'required|min:3|unique:sub_areas',
             'area_id'    => 'required',
         ]);
         $subarea = new SubArea;
@@ -88,8 +89,8 @@ class SubAreaController extends Controller
     public function update(Request $request, SubArea $subarea)
     {
         $data = $request->validate([
-            'subarea_en' => 'min:5',
-            'subarea_mk' => 'min:5',
+            'subarea_en' => 'min:3',
+            'subarea_mk' => 'min:3',
             'area_id'    => 'required', 
         ]);
 

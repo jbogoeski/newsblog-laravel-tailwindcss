@@ -32,11 +32,6 @@ class FrontendController extends Controller
 
     public function singlePost($id)
     {
-        // $categories = Category::all();
-        // $post = Post::with('category.subcategory')->find($id);
-
-        // dd($post);
-
         $post = DB::table('posts')
                     ->join('categories', 'posts.category_id', 'categories.id')
                     ->join('sub_categories', 'posts.subcategory_id', 'sub_categories.id')

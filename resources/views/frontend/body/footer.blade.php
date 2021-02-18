@@ -1,10 +1,15 @@
+@php
+    
+$websitesetting = DB::table('websitesettings')->first();
+@endphp
+
 <section>
     <div class="container-fluid">
         <div class="top-footer">
             <div class="row">
                 <div class="col-md-3 col-sm-4">
                     <div class="foot-logo">
-                        <img src="{{ asset('frontend/img/demofooter.png')}}" style="height: 50px;" />
+                        <img src="{{ asset($websitesetting->logo)}}" style="height: 50px;" />
                     </div>
                 </div>
                 <div class="col-md-6 col-sm-4">
@@ -32,23 +37,49 @@
     </div>
 </section><!-- /.top-footer-close -->
 
+@php
+    $websitesetting = DB::table('websitesettings')->first()
+@endphp
 <!-- middle-footer-start -->	
 <section class="middle-footer">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-4 col-sm-4">
                 <div class="editor-one">
-                    Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is 
+                    @if (session()->get('lang') == 'mkd')
+                    Адреса на компанијата 
+                    <br>
+                        {{ $websitesetting->address_mk}}
+                    @else
+                    Company Address
+                    <br>
+                        {{ $websitesetting->address_en}}
+                    @endif
                 </div>
             </div>
             <div class="col-md-4 col-sm-4">
                 <div class="editor-two">
-                Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is 
-                </div>
+                    @if (session()->get('lang') == 'mkd')
+                    Телефонски број
+                    <br>
+                        {{ $websitesetting->phone_mk}}
+                    @else
+                    Company Phone
+                    <br>
+                        {{ $websitesetting->phone_en}}
+                    @endif                </div>
             </div>
             <div class="col-md-4 col-sm-4">
                 <div class="editor-three">
-                    Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is 
+                    @if (session()->get('lang') == 'mkd')
+                    Емаил
+                    <br>
+                        {{ $websitesetting->email}}
+                    @else
+                    Company Email
+                    <br>
+                        {{ $websitesetting->email}}
+                    @endif    
                 </div>
             </div>
         </div>
@@ -60,15 +91,25 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-6 col-sm-6">
-                <div class="copyright">						
-                    All rights reserved © 2020 EasyLearning
+                <div class="copyright">	
+                    
+                    @if (session()->get('lang') == 'mkd')
+                    Сите права се задржани © 2021 @jbogoeski
+                    @else
+                    All rights reserved © 2021 @jbogoeski
+                    @endif  
                 </div>
             </div>
             <div class="col-md-6 col-sm-6">
                 <div class="btm-foot-menu">
                     <ul>
+                        @if (session()->get('lang') == 'mkd')
+                        <li><a href="#">За Нас</a></li>
+                        <li><a href="#">Контактирајте не</a></li>
+                        @else
                         <li><a href="#">About US</a></li>
                         <li><a href="#">Contact US</a></li>
+                        @endif 
                     </ul>
                 </div>
             </div>

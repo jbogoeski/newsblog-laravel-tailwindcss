@@ -5,14 +5,21 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Backend\AdsController;
 use App\Http\Controllers\Backend\AreaController;
 use App\Http\Controllers\Backend\PostController;
+use App\Http\Controllers\Backend\RoleController;
+use App\Http\Controllers\Backend\PhotoController;
+use App\Http\Controllers\Backend\VideoController;
 use App\Http\Controllers\User\MainUserController;
+use App\Http\Controllers\Backend\LiveTvController;
+use App\Http\Controllers\Backend\NoticeController;
 use App\Http\Controllers\Admin\MainAdminController;
 use App\Http\Controllers\Backend\SubAreaController;
+use App\Http\Controllers\Backend\WebsiteController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Backend\SettingSeoController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\SettingSocialController;
+use App\Http\Controllers\Backend\WebsiteSettingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,7 +43,7 @@ Route::group(['prefix'=>'admin','middleware'=>['admin:admin']], function(){
 });
 
 Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/dashboard', function () {
-    return view('admin.blank');
+    return view('admin.dashboard');
 })->name('dashboard1');
 
 
@@ -72,38 +79,31 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('social', SettingSocialController::class);
     Route::resource('seo', SettingSeoController::class);
     Route::resource('ads', AdsController::class);
+    Route::resource('role', RoleController::class);
+    Route::resource('websitesetting', WebsiteSettingController::class);
+    Route::resource('livetv', LiveTvController::class);
+    Route::resource('notice', NoticeController::class);
+    Route::resource('website', WebsiteController::class);
+    Route::resource('photo', PhotoController::class);
+    Route::resource('video', VideoController::class);
 
+    
+    
 
 });
 
 Route::get('/get/subcategory/{category_id}', [PostController::class, 'getSubCategory']);
 Route::get('/get/subarea/{area_id}', [PostController::class, 'getSubArea']);
-
-
-
 //Frontend
-
 //Multi langugage routes
-
 Route::get('/language/mkd', [FrontendController::class, 'Mkd'])->name('language.mkd');
 Route::get('/language/english', [FrontendController::class, 'English'])->name('language.english');
-
-
 // single post
-
 Route::get('/post/{id}', [FrontendController::class, 'singlePost'])->name('view.post');
-
-
 // category and subcategory post routes
-
 Route::get('/catpost/{id}/{category_en}', [FrontendController::class, 'categoryPost'])->name('post.category');
-
 Route::get('/subpost/{id}/{subcategory_en}', [FrontendController::class, 'subcategoryPost'])->name('post.subcategory');
-
-
 // search area homepage jquery
 Route::get('/get/subarea/frontend/{area_id}', [FrontendController::class, 'getSubarea']);
-
-
 // search form area
 Route::get('/search/area', [FrontendController::class, 'searchArea'])->name('search.areas');

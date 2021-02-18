@@ -40,8 +40,8 @@ class AreaController extends Controller
     {
         
         $data = $request->validate([
-            'area_en' => 'required|min:5|unique:areas',
-            'area_mk' => 'required|min:5|unique:areas',
+            'area_en' => 'required|min:3|unique:areas',
+            'area_mk' => 'required|min:3|unique:areas',
         ]);
         $area = new Area;
         $area->area_en = $request->area_en;
@@ -82,8 +82,8 @@ class AreaController extends Controller
     public function update(Request $request, Area $area)
     {
         $data = $request->validate([
-            'area_en' => 'min:5',
-            'area_mk' => 'min:5',
+            'area_en' => 'min:3',
+            'area_mk' => 'min:3',
         ]);
 
         $area->update($request->all());

@@ -59,7 +59,7 @@
       <!-- ******** -->
 
 @php
-    $relatedposts = DB::table('posts')->where('category_id', $post->category_id)->orderBy('id', 'desc')->limit(6)->get();
+    $relatedposts = DB::table('posts')->where('category_id', $post->category_id)->orderBy('id', 'desc')->limit(3)->get();
 @endphp
 
       <div class="row">
@@ -93,7 +93,7 @@
                     
                 <div class="col-md-4 col-sm-4">
                     <div class="top-news sng-border-btm">
-                        <a href="#"><img src="{{ asset($relatedpost->image) }}" alt="Notebook"></a>
+                        <a href="{{ route('view.post', [$relatedpost->id]) }}"><img src="{{ asset($relatedpost->image) }}" alt="Notebook"></a>
                         <h4 class="heading-02"><a href="#">
                             @if (session()->get('lang') == 'mkd')
                             {{ $relatedpost->title_mk }}
@@ -110,11 +110,16 @@
             </div>
         </div>
 
+        @php
+            	$horizontal = DB::table('ads')->where('type', 1)->skip(1)->first();
+
+        @endphp
+
         <div class="col-md-4 col-sm-4">
             <!-- add-start -->	
                 <div class="row">
                     <div class="col-md-12 col-sm-12">
-                        <div class="sidebar-add"><img src="assets/img/add_01.jpg" alt="" /></div>
+                        <div class="sidebar-add"><img src="{{ asset($horizontal->ads) }}" alt="" /></div>
                     </div>
                 </div><!-- /.add-close -->
             <div class="tab-header">
@@ -219,7 +224,7 @@
             <!-- add-start -->	
                 <div class="row">
                     <div class="col-md-12 col-sm-12">
-                        <div class="sidebar-add"><img src="assets/img/add_01.jpg" alt="" /></div>
+                        <div class="sidebar-add"><img src="{{ asset($horizontal->ads) }}" alt="" /></div>
                     </div>
                 </div><!-- /.add-close -->
         </div>

@@ -22,12 +22,23 @@
               <!-- header -->
               @include('admin.includes.header')
               <!-- header end -->
+
+              @php
+                  $countpost = DB::table('posts')->select('id')->get();
+                  $countcategory = DB::table('categories')->select('id')->get();
+                  $countsubcategory = DB::table('sub_categories')->select('id')->get();
+                  $countuser = DB::table('users')->select('id')->get();
+
+
+              @endphp
   
               <main class="flex-1 overflow-x-hidden overflow-y-auto">
                   <div class="container mx-auto px-6 py-8">
                       {{-- <div class="grid place-items-center h-96 text-gray-500 dark:text-gray-300 text-xl border-4 border-gray-300"> --}}
                           @yield('content')
-                      {{-- </div> --}}
+
+
+                          {{-- </div> --}}
                   </div>
               </main>
 

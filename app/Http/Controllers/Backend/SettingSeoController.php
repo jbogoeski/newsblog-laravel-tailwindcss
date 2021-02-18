@@ -15,7 +15,9 @@ class SettingSeoController extends Controller
      */
     public function index()
     {
-        //
+        $seo = DB::table('seos')->first();
+
+        return view('admin.setting.seo.edit', compact('seo'));
     }
 
     /**
@@ -58,9 +60,7 @@ class SettingSeoController extends Controller
      */
     public function edit($id)
     {
-        $seo = DB::table('seos')->first();
-
-        return view('admin.setting.seo.edit', compact('seo'));
+       
     }
 
     /**

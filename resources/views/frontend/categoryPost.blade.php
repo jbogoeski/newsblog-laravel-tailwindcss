@@ -114,16 +114,16 @@
                                         <a href="#">{{ $catpost->title_mk }}</a>
                                         </div>
                                         <div class="archive_dtails">
-                                            {!! Str::limit($catpost->description_mk, 200) !!}
+                                            {!! Str::limit($catpost->description_mk, 400) !!}
                                         </div>
-                                        <div class="dtails_btn"><a href="#">Read More... MK</a>
+                                        <div class="dtails_btn"><a href="#">Прочитај повеќе</a>
                                         @else
                                         <a href="#">{{ $catpost->title_en }}</a>
                                         </div>
                                         <div class="archive_dtails">
-                                            {!! Str::limit($catpost->description_en, 200) !!}
+                                            {!! Str::limit($catpost->description_en, 400) !!}
                                         </div>
-                                        <div class="dtails_btn"><a href="#">Read More... EN</a>
+                                        <div class="dtails_btn"><a href="#">Read More...</a>
 
 
 
@@ -143,11 +143,15 @@
 					</div>
 				</div>	
 			</div>
+			@php
+			$horizontal = DB::table('ads')->where('type', 1)->skip(1)->first();
+
+			@endphp
 			<div class="col-md-3 col-sm-4">
 				<!-- add-start -->	
 					<div class="row">
 						<div class="col-md-12 col-sm-12">
-							<div class="sidebar-add"><img src="assets/img/add_01.jpg" alt="" /></div>
+							<div class="sidebar-add"><img src="{{ asset($horizontal->ads) }}" alt="" /></div>
 						</div>
 					</div><!-- /.add-close -->
 				<div class="tab-header">
@@ -252,7 +256,7 @@
 				<!-- add-start -->	
 					<div class="row">
 						<div class="col-md-12 col-sm-12">
-							<div class="sidebar-add"><img src="assets/img/add_01.jpg" alt="" /></div>
+							<div class="sidebar-add"><img src="{{ asset($horizontal->ads) }}" alt="" /></div>
 						</div>
 					</div><!-- /.add-close -->
 			</div>			

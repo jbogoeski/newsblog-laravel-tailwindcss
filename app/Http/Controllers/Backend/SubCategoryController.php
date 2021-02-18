@@ -42,8 +42,8 @@ class SubCategoryController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'subcategory_en' => 'required|min:5|unique:sub_categories',
-            'subcategory_mk' => 'required|min:5|unique:sub_categories',
+            'subcategory_en' => 'required|min:3|unique:sub_categories',
+            'subcategory_mk' => 'required|min:3|unique:sub_categories',
             'category_id'    => 'required',
         ]);
         $subcategory = new SubCategory;
@@ -88,8 +88,8 @@ class SubCategoryController extends Controller
     public function update(Request $request, SubCategory $subcategory)
     {
         $data = $request->validate([
-            'subcategory_en' => 'min:5',
-            'subcategory_mk' => 'min:5',
+            'subcategory_en' => 'min:3',
+            'subcategory_mk' => 'min:3',
             'category_id'    => 'required', 
         ]);
 

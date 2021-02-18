@@ -15,7 +15,9 @@ class SettingSocialController extends Controller
      */
     public function index()
     {
-       //
+        $social = DB::table('socials')->where('id', 1)->first();
+
+        return view('admin.setting.social.edit', compact('social'));
     }
 
     /**
@@ -58,9 +60,7 @@ class SettingSocialController extends Controller
      */
     public function edit($id)
     {
-        $social = DB::table('socials')->where('id', 1)->first();
-
-        return view('admin.setting.social.edit', compact('social'));
+       
     }
 
     /**

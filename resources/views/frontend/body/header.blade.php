@@ -4,23 +4,26 @@
     $social = DB::table('socials')->first();
 
     $horizontal = DB::table('ads')->where('type', 2)->first();
+
+	$websitesetting = DB::table('websitesettings')->first();
+
     
 @endphp
 
-<section class="hdr_section">
+<section class="hdr_section" style="background-color: rgb(145, 53, 53)">
     <div class="container-fluid">			
         <div class="row">
             <div class="col-xs-6 col-md-2 col-sm-4">
                 <div class="header_logo">
-                    <a href=""><img src="{{ asset('frontend/img/demo_logo.png')}}"></a> 
+                    <a href="/"><img src="{{ asset($websitesetting->logo)}}"></a> 
                 </div>
             </div>              
             <div class="col-xs-6 col-md-8 col-sm-8">
-                <div id="menu-area" class="menu_area">
-                    <div class="menu_bottom">
-                        <nav role="navigation" class="navbar navbar-default mainmenu">
+                <div id="menu-area" class="menu_area" >
+                    <div class="menu_bottom" style="background-color: rgb(145, 53, 53)">
+                        <nav role="navigation" class="navbar navbar-default mainmenu" >
                     <!-- Brand and toggle get grouped for better mobile display -->
-                            <div class="navbar-header">
+                            <div class="navbar-header" >
                                 <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
                                     <span class="sr-only">Toggle navigation</span>
                                     <span class="icon-bar"></span>
@@ -29,9 +32,9 @@
                                 </button>
                             </div>
                             <!-- Collection of nav links and other content for toggling -->
-                            <div id="navbarCollapse" class="collapse navbar-collapse">
+                            <div id="navbarCollapse" class="collapse navbar-collapse" style="background-color: rgb(145, 53, 53)">
                                 <ul class="nav navbar-nav">
-                                    <li><a href="#">HOME</a></li>
+                                    <li><a href="/">HOME</a></li>
 
                                     @foreach ($categories as $category)
                                     @php
@@ -47,9 +50,9 @@
                                                 {{ $category->category_en }}
                                             @endif
                                             <b class="caret"></b></a>
-                                        <ul class="dropdown-menu">
+                                        <ul class="dropdown-menu" style="background-color: white" >
                                             @foreach ($subcategories as $subcategory)
-                                            <li><a href="{{ route('post.subcategory', [$subcategory->id, $subcategory->subcategory_en]) }}">
+                                            <li  ><a style="color: black" href="{{ route('post.subcategory', [$subcategory->id, $subcategory->subcategory_en]) }}">
                                                 @if (session()->get('lang') == 'mkd')
                                                 {{ $subcategory->subcategory_mk }}
                                                 @else
@@ -74,9 +77,9 @@
 
                         <!-- version-start -->
                         @if (session()->get('lang') == 'mkd')
-                            <li class="version"><a href="{{ route('language.english') }}"><B>ENGLISH</B></a></li>&nbsp;&nbsp;&nbsp;
+                            <li class="version" ><a href="{{ route('language.english') }}"><B style="color:black">ENGLISH</B></a></li>&nbsp;&nbsp;&nbsp;
                         @else
-                            <li class="version"><a href="{{ route('language.mkd') }}"><B>MKD</B></a></li>&nbsp;&nbsp;&nbsp;
+                            <li class="version"><a href="{{ route('language.mkd') }}"><B style="color:black">MKD</B></a></li>&nbsp;&nbsp;&nbsp;
                         @endif
 
                         <!-- login-start -->
@@ -146,15 +149,16 @@
 </section> <!-- /.top-add-close -->
 
 <!-- date-start -->
+
 <section>
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12 col-sm-12">
                 <div class="date">
                     <ul>
-                        <li><i class="fa fa-map-marker" aria-hidden="true"></i>  Dhaka </li>
-                        <li><i class="fa fa-calendar" aria-hidden="true"></i>  Monday, 19th October 2020 </li>
-                        <li><i class="fa fa-clock-o" aria-hidden="true"></i> Update 5 min ago </li>
+                        <li><i class="fa fa-map-marker" aria-hidden="true"></i>  Prilep </li>
+                        <li><i class="fa fa-calendar" aria-hidden="true"></i>  Friday, 19th Fevruary 2021 </li>
+                        <li><i class="fa fa-clock-o" aria-hidden="true"></i> Update 1 day ago </li>
                     </ul>
                     
                 </div>
@@ -168,12 +172,12 @@
      $headline = DB::table('posts')->where('posts.headline', 1)->orderBy('id', 'DESC')->limit(3)->get();
  @endphp
 <section>
-    <div class="container-fluid">
+    <div class="container-fluid" >
         <div class="row scroll">
             @if (session()->get('lang') == 'mkd')
-                <div class="col-md-2 col-sm-3 scroll_01 ">Breaking News MK :</div>
+                <div class="col-md-2 col-sm-3 scroll_01 " style="background-color: rgb(145, 53, 53)">Актуелни вести :</div>
             @else
-                <div class="col-md-2 col-sm-3 scroll_01 ">Breaking News EN:</div>
+                <div class="col-md-2 col-sm-3 scroll_01 " style="background-color: rgb(145, 53, 53)">Breaking News :</div>
             @endif
 
             <div class="col-md-10 col-sm-9 scroll_02">
@@ -189,4 +193,35 @@
             </div>
         </div>
     </div>
-</section>     
+</section>
+
+
+    @php
+     $notices = DB::table('notices')->orderBy('id', 'DESC')->first();
+ @endphp
+
+ @if ($notices->status == 1)
+   
+ <section>
+     <div class="container-fluid">
+        <div class="row scroll">
+            @if (session()->get('lang') == 'mkd')
+            <div class="col-md-2 col-sm-3 scroll_01" style="background-color: green">Notice MK :</div>
+            @else
+            <div class="col-md-2 col-sm-3 scroll_01" style="background-color: green">Notice EN:</div>
+            @endif
+            
+            <div class="col-md-10 col-sm-9 scroll_02">
+                <marquee>
+                    @if (session()->get('lang') == 'mkd')
+                    *    {{ $notices->notice }}
+                    @else
+                    *    {{ $notices->notice }}
+                    @endif
+                </marquee>
+            </div>
+        </div>
+    </div>
+</section>
+     
+@endif
