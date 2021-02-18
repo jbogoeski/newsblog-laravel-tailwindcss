@@ -18,10 +18,14 @@ user: admin@admin.com | password: password
 
 Installation
 git clone https://github.com//jbogoeski/newsblog-laravel-tailwindcss.git blog
-cd blog
+
 composer install
+
 cp .env.example .env
+
 php artisan key:generate
+
 php artisan migrate
+
 php artisan db:seed
 
