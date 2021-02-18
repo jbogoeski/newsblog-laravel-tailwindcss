@@ -1,8 +1,8 @@
 Laravel Blog
-A simple blog for demonstration purpose. Based on Laravel 7.0
+A News Portal for demonstration purpose. Based on Laravel 8.0
 
 Requirements
-Laravel 7.0
+Laravel 8.0
 PHP >= 7.2.5
 OpenSSL PHP Extension
 PDO PHP Extension
