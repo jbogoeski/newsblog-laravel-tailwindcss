@@ -1,5 +1,5 @@
 # NEWS PORTAL 
-Skills-
+Skills-------------------------------------------------------------------------------
 
 -Tailwindcss
 
@@ -11,7 +11,7 @@ Skills-
 
 -Multi Langugage
 
-Installation-
+Installation-------------------------------------------------------------------------
 
 git clone or download
 
@@ -27,7 +27,8 @@ php artisan db:seed
 
 <h3>You will need the sql file witch i have uploaded here, import in your database and you are done!</h3>
 
-Demo login info
+Demo login info:
+
 Use localhost:8000/admin/login and localhost:8000/admin/dashboard for admin Login. 
 Use localhost:8000/login and localhost:8000/dashboard for User Login. 
 
