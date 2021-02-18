@@ -25,7 +25,8 @@ php artisan migrate
 
 php artisan db:seed
 
-<h3>You will need the sql file witch i have uploaded here, import in your database and you are done!</h3>
+<h3>You will need the sql file
+    I have uploaded here, import in your database and you are done!</h3>
 
 Demo login info:
 
